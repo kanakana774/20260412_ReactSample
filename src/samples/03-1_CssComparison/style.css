@@ -1,0 +1,11 @@
+/* style.css */
+.plain-card {
+  border: 2px solid #1e90ff;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #e7f3ff;
+}
+.plain-title {
+  margin: 0;
+  color: #1e90ff;
+}
