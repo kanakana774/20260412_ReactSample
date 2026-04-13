@@ -95,7 +95,7 @@ export const Layout = ({ samples }: LayoutProps) => {
           style={{
             // maxWidth: "1000px",
             margin: "0 auto",
-            padding: "2rem",
+            // padding: "2rem",
             background: "#fff",
             minHeight: "100vh",
             boxShadow: "0 0 20px rgba(0,0,0,0.05)",
