@@ -20,6 +20,12 @@ export const Layout = ({ samples }: LayoutProps) => {
           color: "#fff",
           padding: "1.5rem",
           boxShadow: "2px 0 5px rgba(0,0,0,0.1)",
+
+          // navbarをスクロールに変更
+          height: "100vh",
+          overflowY: "auto",
+          position: "fixed",
+          top: 0,
         }}
       >
         <h2
@@ -75,7 +81,16 @@ export const Layout = ({ samples }: LayoutProps) => {
       </nav>
 
       {/* メイン画面 */}
-      <main style={{ flex: 1, overflowY: "auto", background: "#f9f9f9" }}>
+      <main
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          background: "#f9f9f9",
+
+          // navbarをスクロールにしたため変更
+          marginLeft: "280px",
+        }}
+      >
         <div
           style={{
             // maxWidth: "1000px",
