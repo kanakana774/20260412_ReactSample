@@ -31,28 +31,34 @@ const MEMBER_DATA: MemberCardProps[] = [
 
 export default function PropsBasic() {
   return (
-    <section style={styles.container}>
-      <header>
-        <h2 style={styles.title}>メンバー</h2>
-      </header>
+    <>
+      <section style={styles.container}>
+        <header>
+          <h2 style={styles.title}>メンバー</h2>
+        </header>
 
-      <div style={styles.list}>
-        {/* ※2 jsx内でtsを使う際は波括弧でくくる */}
-        {/* ※2 jsx内の波括弧では「文」が使えない！ */}
-        {/* ※2 mapで配列を回して表示するやり方は頻出 */}
-        {MEMBER_DATA.map((member) => (
-          <MemberCard
-            key={member.name} // ※3 keyを忘れないように！
-            name={member.name}
-            role={member.role}
-            level={member.level}
-            isOnline={member.isOnline}
+        <div style={styles.list}>
+          {/* ※2 jsx内でtsを使う際は波括弧でくくる */}
+          {/* ※2 jsx内の波括弧では「文」が使えない！ */}
+          {/* ※2 mapで配列を回して表示するやり方は頻出 */}
+          {MEMBER_DATA.map((member) => (
+            <MemberCard
+              key={member.name} // ※3 keyを忘れないように！
+              name={member.name}
+              role={member.role}
+              level={member.level}
+              isOnline={member.isOnline}
 
-            // key={member.name} // ※4 プロパティ名が同じならスプレッド構文で指定することも可
-            // {...member}
-          />
-        ))}
-      </div>
-    </section>
+              // key={member.name} // ※4 プロパティ名が同じならスプレッド構文で指定することも可
+              // {...member}
+            />
+          ))}
+        </div>
+      </section>
+      <section>
+        <h3>参考：</h3>
+        <a href="https://jsprimer.net/basic/statement-expression/">式と文</a>
+      </section>
+    </>
   );
 }

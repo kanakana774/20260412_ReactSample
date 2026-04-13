@@ -60,7 +60,12 @@ export default function NestedStateMutation() {
       <section style={{ marginTop: "100px" }}>
         <iframe
           src="https://ja.react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react"
-          title={"react公式"}
+          title={"react公式-React ではなぜ state の変更が非推奨なのか？ "}
+          style={{ width: "100%", minHeight: "1000px" }}
+        />
+        <iframe
+          src="https://ja.react.dev/learn/updating-objects-in-state#how-does-immer-work"
+          title={"react公式-Immer はどのように動作するのか？"}
           style={{ width: "100%", minHeight: "1000px" }}
         />
       </section>

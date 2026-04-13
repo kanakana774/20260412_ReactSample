@@ -6,7 +6,6 @@ const styles: { [key: string]: CSSProperties } = {
   container: {
     padding: "40px 20px",
     backgroundColor: "#f6f8fa",
-    minHeight: "100vh",
   },
   title: {
     textAlign: "center",
