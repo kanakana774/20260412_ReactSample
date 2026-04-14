@@ -1,77 +1,95 @@
-import React, { useState, useCallback } from "react";
-import { MemoButton } from "./MemoButton";
+import { useState, useCallback } from "react";
+import ChildButton from "./ChildButton";
 
-export default function UseCallbackDemo() {
-  const [count, setCount] = useState(0);
-  const [toggle, setToggle] = useState(false);
+// --- 親コンポーネント ---
+export default function UseCallbackCompleteDemo() {
+  const [count, setCount] = useState(0); // 全体の再レンダリング用
+  const [toggle, setToggle] = useState(false); // 特定の依存配列用
 
-  console.log("%c--- Parent Render ---", "color: #2ecc71; font-weight: bold;");
-
-  // 手法1：普通の関数
-  // 親が再描画されるたびに、新しい関数オブジェクトとして作り直される
-  const handleClickNormal = () => {
-    setCount((prev) => prev + 1);
+  // パターン1: useCallbackなし (毎回新しい関数が生成される)
+  const handleNoMemo = () => {
+    console.log("No Memo clicked");
   };
 
-  // 手法2：useCallback でメモ化された関数
-  // 親が再描画されても、依存配列([])が変わらない限り、同じ関数オブジェクトを使い回す
-  const handleClickMemoized = useCallback(() => {
-    setCount((prev) => prev + 1);
-  }, []); // 依存配列が空なので、最初の一回しか作られない
+  // パターン2: useCallback(空の依存配列) (最初の1回だけ生成、ずっと使い回す)
+  const handleWithMemoEmptyDeps = useCallback(() => {
+    console.log("Empty Deps clicked");
+  }, []);
+
+  // パターン3: useCallback(依存配列あり) (toggleが変わった時だけ生成し直す)
+  const handleWithMemoActiveDeps = useCallback(() => {
+    console.log("Active Deps clicked", toggle);
+  }, [toggle]);
 
   return (
-    <div style={{ padding: "30px", fontFamily: "sans-serif" }}>
-      <h2>useCallback の比較</h2>
-      <p>
-        現在のカウント: <strong>{count}</strong>
-      </p>
-
-      {/* 無関係なStateを更新するボタン */}
-      <button onClick={() => setToggle(!toggle)}>
-        親の無関係なState(toggle)を更新: {String(toggle)}
-      </button>
-
-      <hr />
-
-      <section>
-        <h4>1. 通常の関数を渡す</h4>
-        <MemoButton onClick={handleClickNormal} label="Normal Button" />
-        <p style={{ fontSize: "0.8rem" }}>
-          toggleを変えるだけで再描画されてしまいます（関数が作り直されるため）。
-        </p>
-      </section>
-
-      <section style={{ marginTop: "20px" }}>
-        <h4>2. useCallbackした関数を渡す</h4>
-        <MemoButton onClick={handleClickMemoized} label="Memoized Button" />
-        <p style={{ fontSize: "0.8rem" }}>
-          toggleを変えても再描画されません（関数が同じままだと判定されるため）。
-        </p>
-      </section>
+    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+      <h1>useCallback 比較デモ</h1>
 
       <div
         style={{
-          marginTop: "30px",
-          padding: "15px",
           backgroundColor: "#f0f0f0",
+          padding: "15px",
+          borderRadius: "10px",
         }}
       >
-        <h4>💡 なぜこれが必要なの？</h4>
-        <ul>
-          <li>
-            JavaScriptでは、<code>const f = () =&gt; {}</code>{" "}
-            は実行されるたびに<strong>「新しい別物」</strong>として作られます。
-          </li>
-          <li>
-            そのため、<code>React.memo</code>{" "}
-            を使っていても、Props（関数）が「新しい別物」になったと判定され、再描画が起きてしまいます。
-          </li>
-          <li>
-            <code>useCallback</code> を使うと、関数をメモリに保存して
-            <strong>「前回と同じもの」</strong>として渡せるようになります。
-          </li>
-        </ul>
+        <h3>親のState操作</h3>
+        {/* これを押すと親全体が再レンダリングされる */}
+        <button onClick={() => setCount((c) => c + 1)}>
+          1. 親を再レンダリング (count: {count})
+        </button>
+
+        {/* これを押すと、パターン3の依存先だけが変わる */}
+        <button
+          onClick={() => setToggle((t) => !t)}
+          style={{ marginLeft: "10px" }}
+        >
+          2. 依存Stateを変更 (toggle: {String(toggle)})
+        </button>
       </div>
+
+      <p>※ コンソールを見て、どの子コンポーネントが動いたか確認してください</p>
+
+      {/* --- パターン1 --- */}
+      <ChildButton
+        title="パターン1: メモ化なし（親が動くと毎回再描画）"
+        borderColor="#dc143c"
+        logColor="#dc143c"
+        onClick={handleNoMemo}
+      />
+
+      {/* --- パターン2 --- */}
+      <ChildButton
+        title="パターン2: useCallback([]) （親が動いても再描画されない）"
+        borderColor="#7fff00"
+        logColor="#7fff00"
+        onClick={handleWithMemoEmptyDeps}
+      />
+
+      {/* --- パターン3 --- */}
+      <ChildButton
+        title="パターン3: useCallback([toggle]) （toggle変更時のみ再描画）"
+        borderColor="#00bfff"
+        logColor="#00bfff"
+        onClick={handleWithMemoActiveDeps}
+      />
+
+      <hr />
+
+      <h3>使いどころ</h3>
+      <ul>
+        <li>
+          React.memo を使っている子コンポーネントに関数を渡すとき（これが 9
+          割です）。
+        </li>
+        <li>useEffect の依存配列の中に関数を入れる必要があるとき。</li>
+      </ul>
+
+      <h3>やりがちな間違い</h3>
+      <ul>
+        <li>
+          React.memo を使っていない子コンポーネントに useCallback した関数を渡す
+        </li>
+      </ul>
     </div>
   );
 }
