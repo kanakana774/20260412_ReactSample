@@ -12,6 +12,7 @@ export default function VideoPlayerHover() {
     const video = videoRef.current;
     if (!video) return;
 
+    // videoが持っている関数とか見てみる
     console.dir(video);
     if (video.paused) {
       video.play();
