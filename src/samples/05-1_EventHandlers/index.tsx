@@ -8,6 +8,8 @@ const styles: { [key: string]: React.CSSProperties } = {
 };
 
 export default function EventHandlers() {
+  let text = "";
+
   // 親側で実際の処理(関数)を定義する
   // ※1 ハンドラの命名規則：handle + イベント名（または動詞）
   const handleSave = () => {
@@ -17,6 +19,9 @@ export default function EventHandlers() {
   // ※2 TSなのでインラインで定義しない関数の引数の型は明示
   const handleInputChange = (value: string) => {
     console.log("入力中の文字:", value);
+
+    // ※3 入力した内容で画面の表示を変更してみるが。。。できない、、、
+    text = value;
   };
 
   const handleFormSubmit = () => {
@@ -46,6 +51,9 @@ export default function EventHandlers() {
           onFormSubmit={handleFormSubmit}
         />
       </section>
+
+      {/* // ※3 入力した内容で画面の表示を変更してみるが。。。できない、、、 */}
+      <h3>入力内容：{text}</h3>
 
       <div style={styles.logArea}>
         <p>★ 動作の詳細はブラウザのコンソールを確認</p>

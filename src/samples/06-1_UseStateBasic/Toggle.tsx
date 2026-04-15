@@ -1,3 +1,4 @@
+import { p } from "framer-motion/client";
 import React, { useState } from "react";
 
 const styles: { [key: string]: React.CSSProperties } = {

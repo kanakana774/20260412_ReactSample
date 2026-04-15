@@ -31,8 +31,8 @@ export const MissingValueBug = () => {
       <h4>⚠️ value属性を渡し忘れたケース</h4>
       <input
         style={styles.input}
-        onChange={(e) => setText(e.target.value)}
         // ※1 value={text} が無い！
+        onChange={(e) => setText(e.target.value)}
         placeholder="入力はできますが、リセットボタンが効きません"
       />
       <div style={styles.stateBox}>

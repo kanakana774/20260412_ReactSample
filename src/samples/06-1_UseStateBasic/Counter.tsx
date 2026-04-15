@@ -21,12 +21,16 @@ export const Counter = () => {
   // 再レンダリング確認用
   console.log("%cCounter：" + count, "color:crimson;");
 
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+
   return (
     <div style={styles.container}>
       <h3>1. 数値の管理 (Counter)</h3>
       <p style={styles.countText}>{count}</p>
       {/* ※2 countの更新用関数で更新するとCounter関数コンポーネントが再レンダー（再計算）される */}
-      <button style={styles.button} onClick={() => setCount(count + 1)}>
+      <button style={styles.button} onClick={handleClick}>
         ＋
       </button>
       <button style={styles.button} onClick={() => setCount(count - 1)}>
