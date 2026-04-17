@@ -1,3 +1,4 @@
+import { CollectInputControll } from "./CollectInputControll";
 import { MissingValueBug } from "./MissingValueBug";
 import { WarningTrigger } from "./WarningTrigger";
 
@@ -12,6 +13,7 @@ export default function InputSyncIssues() {
 
       <MissingValueBug />
       <WarningTrigger />
+      <CollectInputControll />
 
       <div
         style={{

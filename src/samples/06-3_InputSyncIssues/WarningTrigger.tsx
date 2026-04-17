@@ -1,8 +1,9 @@
 import { useState } from "react";
 
 export const WarningTrigger = () => {
-  // ※2 初期値を undefined (または null) にしてしまう
-  const [val, setVal] = useState<string | undefined>(undefined);
+  // ※2 初期値を null (または undefined) にしてしまう
+  // 一応、undefinedは未定義で、nullは明示的に空なので、入力欄を扱うstateの場合にnullの方が意味的には適切
+  const [val, setVal] = useState<string | null>(null);
 
   // 再レンダリング確認用
   console.log("%cWarningTrigger：" + val, "color:crimson;");
@@ -13,11 +14,12 @@ export const WarningTrigger = () => {
         padding: "15px",
         border: "2px solid #c0392b",
         borderRadius: "8px",
+        marginBottom: "20px",
       }}
     >
       <h4>🚨 警告が発生するケース (Consoleを確認)</h4>
       <input
-        value={val} // ※2 💡最初は undefined なので「非制御」とみなされる
+        value={val} // ※2 💡最初は null なので「非制御」とみなされる
         onChange={(e) => setVal(e.target.value)} // ※2 入力した瞬間に string になり「制御」に切り替わる
         placeholder="一文字打つと警告が出ます"
         style={{ padding: "8px", width: "100%" }}
