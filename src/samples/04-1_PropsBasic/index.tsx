@@ -55,7 +55,7 @@ export default function PropsBasic() {
           ))}
         </div>
       </section>
-      <section>
+      <section style={styles.container}>
         <h3>参考：</h3>
         <a href="https://jsprimer.net/basic/statement-expression/">式と文</a>
       </section>

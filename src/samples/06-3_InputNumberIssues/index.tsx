@@ -1,11 +1,11 @@
-import { InputNumberPattern } from "./InputNumberPattern";
+import { InputNumberPatterns } from "./InputNumberPattern";
 
 export default function InputNumber() {
   return (
     <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
-      <h2>数値をstateで管理するには</h2>
+      <h2>数値入力欄あれこれ</h2>
 
-      <InputNumberPattern />
+      <InputNumberPatterns />
 
       <div
         style={{

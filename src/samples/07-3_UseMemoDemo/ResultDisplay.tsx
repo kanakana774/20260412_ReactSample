@@ -8,8 +8,10 @@ type ResultDisplayProps = {
 };
 
 // --- 子コンポーネント ---
+// メモ化していて、value以外定数なので、親で計算したvalueが更新されたときのみ再レンダリング
 const ResultDisplay = React.memo(
   ({ title, value, borderColor, logColor }: ResultDisplayProps) => {
+    // 子コンポーネントのレンダリングをログ表示
     console.log(`%c[Render] ${title}`, `color: ${logColor}`);
     return (
       <div

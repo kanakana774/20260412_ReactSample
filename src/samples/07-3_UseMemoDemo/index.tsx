@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import ResultDisplay from "./ResultDisplay";
 
 // --- 重い計算関数の定義 ---

@@ -27,7 +27,7 @@ export default function Basic() {
       {/* 
         本来、refをここで表示するのは推奨されませんが、
         「再レンダリングが走った瞬間に最新のrefが読み込まれる」
-        ことを確認するために、あえて表示させています。
+        ことを確認するために、あえて表示させている。
       */}
       <p>Refの保持内容: {countRef.current}</p>
       <button onClick={incrementRef}>Refを増やす（ログに出力）</button>
@@ -44,7 +44,7 @@ export default function Basic() {
         <strong>
           確認手順
           <br />
-          1. 「Refを増やす」を数回押す（画面は何も変わりません）
+          1. 「Refを増やす」を数回押す（画面は何も変わらない）
           <br />
           2. コンソールを見て値が増えているのを確認する
           <br />
